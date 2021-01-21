@@ -1,6 +1,5 @@
 let monsters = []
 BASE_URL = "http://localhost:3000/monsters/"
-OLD_URL = "http://localhost:3000/monsters/?_limit=50&_page=1"
 let page = 1
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,21 +38,17 @@ const renderMonsters = (monster) => {
 
 const pageChange = (direction) => {
     document.querySelector('#monster-container').innerHTML = ""
-    let oldUrl = OLD_URL.split("")
-    currentPage = parseInt(oldUrl[oldUrl.length - 1])
 
     if (direction == "left"){
-        if (currentPage == 1) {
+        if (page == 1) {
             alert("There are no monsters here!")
         } else {
-            currentPage = currentPage - 1
+            page = page - 1
         }
     } else if (direction == "right") {
-        currentPage = currentPage + 1
+        page = page + 1
     }
-    oldUrl[oldUrl.length - 1] = currentPage
-    newUrl = oldUrl.join("")
-    OLD_URL = newUrl
+    newUrl = BASE_URL + "?_limit=50&_page=" + page
     
     console.log(newUrl)
 
